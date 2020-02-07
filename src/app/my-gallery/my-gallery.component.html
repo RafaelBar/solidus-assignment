@@ -1,1 +1,12 @@
-<p>my-gallery works!</p>
+<div class=container *ngIf="showSearch == 'true'">
+    <input class="form-group" placeholder="search" />
+</div>
+<ul>
+    <li *ngFor="let image of images">
+        <h2>{{image.title}}</h2>
+        <div>
+            <img [src]="image.url" onError="this.src='https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'" />
+        </div>
+        <div>{{image.date}}</div>
+    </li>
+</ul>
