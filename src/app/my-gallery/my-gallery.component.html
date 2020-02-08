@@ -1,12 +1,51 @@
-<div class=container *ngIf="showSearch == 'true'">
+<div class="container" *ngIf="showSearch == 'true'">
     <input class="form-group" placeholder="search" />
 </div>
-<ul>
-    <li *ngFor="let image of images">
-        <h2>{{image.title}}</h2>
-        <div>
-            <img [src]="image.url" onError="this.src='https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'" />
+
+<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="grid" class="row">
+                    <div *ngFor="let image of images" class="mix col-sm-3 page1 page4 margin30">
+                        <div class="item-img-wrap ">
+                            <img [src]="image.url" onError="this.src='https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'" class="img-responsive" alt="workimg">
+                            <div class="item-img-overlay">
+                                <a href="#" class="show-image">
+                                    <span>{{image.title}}</span>
+                                    
+                                </a>
+                            </div>
+                            
+                        </div> 
+                        <h6>{{image.date}}</h6>
+                    </div>
+                                                           
+                </div><!--grid-->
+            </div>
         </div>
-        <div>{{image.date}}</div>
-    </li>
-</ul>
+        <div class="row gallery-bottom">
+            <div class="col-sm-6">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">«</span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-6 text-right">
+                <em>Displaying 1 to 8 (of {{images.length}} posts)</em>
+            </div>
+        </div>
+    </div>
+    
