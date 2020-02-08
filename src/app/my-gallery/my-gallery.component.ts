@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { AppModule } from '../app.module';
 import { HttpClient } from "@angular/common/http";
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'my-gallery',
@@ -18,11 +16,11 @@ export class MyGalleryComponent implements OnInit {
   @ViewChild('slideshow', {static: false}) slideshow: any; 
   
   @Input() feed: string;
-  @Input() search: boolean;
-  @Input() pagination: boolean;
-  @Input() sorting: boolean;
-  @Input() itemsPerPage: number;
-  @Input() transitionTime: number;
+  @Input() search: boolean = true;
+  @Input() pagination: boolean = true;
+  @Input() sorting: boolean = true;
+  @Input() itemsPerPage: number = 10;
+  @Input() transitionTime: number = 4;
 
   constructor(private httpClient: HttpClient) { }
    
@@ -30,16 +28,11 @@ export class MyGalleryComponent implements OnInit {
       this.httpClient.get(this.feed).subscribe(data =>{
         //console.log(data);
         this.images = data;
-      })
-      this.search = this.search ?  this.search : true;
-      this.pagination = this.pagination ?  this.pagination : true;
-      this.sorting = this.sorting ?  this.sorting : true;
-      this.itemsPerPage = this.itemsPerPage ?  this.itemsPerPage : 10;
-      this.transitionTime = this.transitionTime ?  this.transitionTime : 4;
+      });
   }
 
   sortBy(sortType: string){
-    if(sortType == "title")
+    if(sortType === "title")
       this.images.sort((a,b) => a.title.localeCompare(b.title));
     else
       this.images.sort((a,b) => new Date(a.date).getTime() - new Date(b.date).getTime());
