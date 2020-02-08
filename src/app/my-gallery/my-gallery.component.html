@@ -1,51 +1,55 @@
-<div class="container" *ngIf="showSearch == 'true'">
-    <input class="form-group" placeholder="search" />
-</div>
-
 <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="grid" class="row">
-                    <div *ngFor="let image of images" class="mix col-sm-3 page1 page4 margin30">
-                        <div class="item-img-wrap ">
-                            <img [src]="image.url" onError="this.src='https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'" class="img-responsive" alt="workimg">
-                            <div class="item-img-overlay">
-                                <a href="#" class="show-image">
-                                    <span>{{image.title}}</span>
-                                    
-                                </a>
-                            </div>
-                            
-                        </div> 
-                        <h6>{{image.date}}</h6>
-                    </div>
-                                                           
-                </div><!--grid-->
+    <div class="topBlock">
+        <div class="inputContainer" *ngIf="search">
+            <input (keypress)="p=1" [(ngModel)]="searchText" class="form-group" placeholder="Search for an image" />
+        </div>
+        <div *ngIf="pagination" class="dropdown pagination">
+            <button class="dropbtn">Items per page</button>
+            <div class="dropdown-content">
+                <div (click)="itemsPerPage=5; p=1">5</div>
+                <div (click)="itemsPerPage=10; p=1">10</div>
+                <div (click)="itemsPerPage=15; p=1">15</div>
+                <div (click)="itemsPerPage=20; p=1">20</div>
             </div>
         </div>
-        <div class="row gallery-bottom">
-            <div class="col-sm-6">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">«</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">»</span>
-                        </a>
-                    </li>
-                </ul>
+
+        <div *ngIf="sorting" class="dropdown sorting">
+                <button class="dropbtn">Sort by</button>
+                <div class="dropdown-content">
+                    <div (click)="sortBy('title'); p=1">Image name</div>
+                    <div (click)="sortBy('date'); p=1">image date</div>
+                </div>
             </div>
-            <div class="col-sm-6 text-right">
-                <em>Displaying 1 to 8 (of {{images.length}} posts)</em>
-            </div>
-        </div>
     </div>
+    <div class="">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="grid" class="row">
+                        <div *ngFor="let image of images | search:'title':searchText | paginate: { itemsPerPage: (pagination? itemsPerPage : images.length), currentPage: p } " class="mix col-sm-3 page1 page4 margin30">
+                            <div class="item-img-wrap ">
+                                <img [src]="image.url" onError="this.src='https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'" class="img-responsive" alt="workimg">
+                                <div class="item-img-overlay">
+                                    <a href="#" class="show-image">
+                                        <span>{{image.title}}</span>
+                                        
+                                    </a>
+                                </div>
+                                
+                            </div> 
+                            <h6>{{image.date}}</h6>
+                        </div>
+                                                            
+                    </div><!--grid-->
+                </div>
+            </div>
+            <div *ngIf="pagination" class="row gallery-bottom">
+                <div class="col-sm-6">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <em>Displaying {{itemsPerPage * p - itemsPerPage}} to {{itemsPerPage * p}} (of {{images.length}} posts)</em>
+                </div>
+            </div>
+        </div>
+</div>
     
