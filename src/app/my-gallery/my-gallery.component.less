@@ -172,3 +172,44 @@
 .pagination{
   margin-right: 10px;
 }
+
+.carousel{
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  bottom:0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.4);
+}
+
+.show-image{
+  cursor: pointer;
+}
+.carousel-item{
+  .picsum-img-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    img{
+      width:auto;
+      height:auto;
+    }
+  }
+}
+
+.carousel-indicators{
+  display: none;
+}
+
+.cancel{
+  font-size: 38px;
+    position: absolute;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    z-index: 9999;
+    top: 0px;
+    right: 30px;
+}

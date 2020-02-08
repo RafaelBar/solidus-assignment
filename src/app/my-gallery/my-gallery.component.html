@@ -1,4 +1,18 @@
 <div class="container">
+    <!-- <app-ngbd-carousel [data]="images"></app-ngbd-carousel> -->
+    <div *ngIf="isSlideshow" class="cancel" (click)="isSlideshow=false">x</div>
+    <ngb-carousel *ngIf="isSlideshow" interval="transitionTime" pauseOnHover="false">
+            
+            <ng-template *ngFor="let image of sliderImages" ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img [src]="image.url"  onError="this.src='https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'" alt="Random first slide">
+              </div>
+              <div class="carousel-caption">
+                <h3>{{image.title}}</h3>
+                <p>{{image.date}}</p>
+              </div>
+            </ng-template>
+          </ngb-carousel>   
     <div class="topBlock">
         <div class="inputContainer" *ngIf="search">
             <input (keypress)="p=1" [(ngModel)]="searchText" class="form-group" placeholder="Search for an image" />
@@ -25,14 +39,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div id="grid" class="row">
-                        <div *ngFor="let image of images | search:'title':searchText | paginate: { itemsPerPage: (pagination? itemsPerPage : images.length), currentPage: p } " class="mix col-sm-3 page1 page4 margin30">
-                            <div class="item-img-wrap ">
+                        <div *ngFor="let image of images | search:'title':searchText | paginate: { itemsPerPage: (pagination? itemsPerPage : images.length), currentPage: p }; index as i"  class="mix col-sm-3 page1 page4 margin30 {{i}}">
+                            <div class="item-img-wrap " (click)="openSlideshow(i); isSlideshow=true">
                                 <img [src]="image.url" onError="this.src='https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'" class="img-responsive" alt="workimg">
                                 <div class="item-img-overlay">
-                                    <a href="#" class="show-image">
+                                    <div class="show-image">
                                         <span>{{image.title}}</span>
                                         
-                                    </a>
+                                    </div>
                                 </div>
                                 
                             </div> 

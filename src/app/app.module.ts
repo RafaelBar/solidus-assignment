@@ -5,9 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MyGalleryComponent } from './my-gallery/my-gallery.component';
 import { HttpClientModule } from '@angular/common/http';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { SearchPipe } from './my-gallery/search.pipe';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { SlideshowModule } from 'ng-simple-slideshow';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import {FormsModule} from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    SlideshowModule,
+    NgbModule
   ],
   exports: [],
   providers: [],
